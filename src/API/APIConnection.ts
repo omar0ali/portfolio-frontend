@@ -1,5 +1,5 @@
 //TODO: Write Functions: GET, POST, UPDATE, DELETE, Requests Calls to get data from the backend.
-const API_BASE_URL = "http://localhost:3000"; // Replace with your Go backend URL
+const API_BASE_URL = "http://localhost:3000"; // Replace with your backend URL
 
 // Define a generic response type if needed
 interface ApiResponse<T> {
