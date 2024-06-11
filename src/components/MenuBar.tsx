@@ -1,14 +1,14 @@
-export interface Menu {
-    item_name: string;
-    item_link: string;
+interface MenuBar {
+    menuItems: { item_name: string; item_link: string }[];
+    title: string;
 }
 
-export function MenuBar(title: string, menu: Menu[]) {
+export function MenuBar(props: MenuBar) {
     return (
         <>
             <nav className="navbar sticky-top navbar-expand-lg bg-body-tertiary rounded">
                 <div className="container-fluid">
-                    <a className="navbar-brand">{title}</a>
+                    <a className="navbar-brand">{props.title}</a>
                     <button
                         className="navbar-toggler"
                         type="button"
@@ -22,8 +22,8 @@ export function MenuBar(title: string, menu: Menu[]) {
                     </button>
                     <div className="collapse navbar-collapse" id="navbarNav">
                         <ul className="navbar-nav">
-                            {menu
-                                ? menu.map((item) => menuItem(item))
+                            {props.menuItems
+                                ? props.menuItems.map((item) => menuItem(item))
                                 : menuItem({
                                       item_name: "No Items",
                                       item_link: "#",
@@ -36,15 +36,15 @@ export function MenuBar(title: string, menu: Menu[]) {
     );
 }
 
-function menuItem(menu: Menu) {
+function menuItem(item: { item_name: string; item_link: string }) {
     return (
-        <li key={menu.item_name} className="nav-item">
+        <li key={item.item_name} className="nav-item">
             <a
                 className="nav-link active"
                 aria-current="page"
-                href={menu.item_link}
+                href={item.item_link}
             >
-                {menu.item_name}
+                {item.item_name}
             </a>
         </li>
     );

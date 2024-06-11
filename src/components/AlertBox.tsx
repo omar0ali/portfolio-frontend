@@ -1,3 +1,4 @@
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 import { Colors } from "./Colors.tsx";
 import { useState } from "react";
 
@@ -5,19 +6,23 @@ export interface AlertElement {
     closable: boolean;
     text: JSX.Element;
     color: Colors;
+    show?: boolean;
 }
 
 export default function AlertBox(alert: AlertElement) {
+    const [refresh] = useAutoAnimate<HTMLDivElement>();
     const [showAlert, setShowAlert] = useState<boolean>(true);
-    const handleClose = (): void => {
-        setShowAlert(false);
-    };
     const className = function (color: Colors): string {
         return `alert alert-${color}`;
     };
 
     return (
-        <div style={{ marginTop: "10px" }}>
+        <div
+            ref={refresh}
+            style={{
+                display: alert.show ? "block" : "none",
+            }}
+        >
             {!alert.closable ? (
                 <div className={className(alert.color)} role="alert">
                     {alert.text}
@@ -34,7 +39,7 @@ export default function AlertBox(alert: AlertElement) {
                         <button
                             type="button"
                             className="btn-close"
-                            onClick={handleClose}
+                            onClick={() => setShowAlert(false)}
                             aria-label="Close"
                         ></button>
                     </div>

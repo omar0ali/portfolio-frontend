@@ -1,6 +1,16 @@
 body {
+    font-size: 20px;
     margin-top: 10px;
     margin-left: 200px;
     margin-right: 200px;
     margin-bottom: 30px;
+}
+
+@media (max-width: 900px) {
+    body {
+        margin-top: 10px;
+        margin-left: 30px;
+        margin-right: 30px;
+        margin-bottom: 30px;
+    }
 }

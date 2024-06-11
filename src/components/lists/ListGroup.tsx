@@ -2,19 +2,23 @@ import { useState } from "react";
 
 interface Props {
     items: { text: JSX.Element; onClickEvent?: () => void }[];
+    clickable?: boolean;
 }
 
 function item(
     text: JSX.Element,
     pos: { selectedIndex: number; index: number },
     onClickEvent: () => void,
-    setActive: (i: number) => void
+    setActive: (i: number) => void,
+    clickable: boolean = true
 ) {
     return (
         <li
             key={pos.index}
             className={`list-group-item list-group-item-action ${
-                pos.selectedIndex === pos.index ? "active" : null
+                pos.selectedIndex === pos.index && clickable == true
+                    ? "active"
+                    : null
             }`}
             onClick={function () {
                 setActive(pos.index);
@@ -26,7 +30,7 @@ function item(
     );
 }
 
-export default function ListGroup({ items }: Props) {
+export default function ListGroup({ items, clickable }: Props) {
     const [selectedIndex, setSelectedIndex] = useState<number>(-1);
     return (
         <>
@@ -40,7 +44,8 @@ export default function ListGroup({ items }: Props) {
                             : function () {
                                   setSelectedIndex(index);
                               },
-                        setSelectedIndex
+                        setSelectedIndex,
+                        clickable
                     )
                 )}
             </ul>

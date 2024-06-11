@@ -1,7 +1,11 @@
-export default function Link(link: string, replaceWith?: string) {
+interface Props {
+    url: string;
+    replaceWith?: string;
+}
+export default function Link(props: Props) {
     return (
-        <link href={link} className="alert-link">
-            {replaceWith ? replaceWith : link}
-        </link>
+        <a href={props.url} className="alert-link">
+            {props.replaceWith ? props.replaceWith : props.url}
+        </a>
     );
 }
